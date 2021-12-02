@@ -10,29 +10,33 @@ var input = file.ReadToEnd()
 var sw = new Stopwatch();
 
 sw.Start();
-var part1 = input.Aggregate((pos: 0, depth: 0), (acc, instr) =>
-    instr.dir switch
+var part1 = input.Aggregate((
+    pos: 0, depth: 0),
+    (acc, instr) => instr.dir switch
     {
         "forward" => (acc.pos += instr.amt, acc.depth),
         "down" => (acc.pos, acc.depth += instr.amt),
         "up" => (acc.pos, acc.depth -= instr.amt),
         _ => acc
-    }
+    },
+    result => result.pos * result.depth
 );
 sw.Stop();
-Console.WriteLine($"[{sw.Elapsed}] P1: {part1.pos * part1.depth}");
+Console.WriteLine($"[{sw.Elapsed}] P1: {part1}");
 
 sw.Reset();
 sw.Start();
-var part2 = input.Aggregate((pos: 0, depth: 0, aim: 0), (acc, insr) =>
-    insr.dir switch
+var part2 = input.Aggregate(
+    (pos: 0, depth: 0, aim: 0),
+    (acc, insr) => insr.dir switch
     {
         "forward" => (acc.pos += insr.amt, acc.depth += insr.amt * acc.aim, acc.aim),
         "down" => (acc.pos, acc.depth, acc.aim += insr.amt),
         "up" => (acc.pos, acc.depth, acc.aim -= insr.amt),
         _ => acc
-    }
+    },
+    result => result.pos * result.depth
 );
 sw.Stop();
 
-Console.WriteLine($"[{sw.Elapsed}] P2: {part2.pos * part2.depth}");
+Console.WriteLine($"[{sw.Elapsed}] P2: {part2}");
