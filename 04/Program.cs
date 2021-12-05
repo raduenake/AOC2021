@@ -2,7 +2,7 @@
 using System.Collections.Immutable;
 using System.Diagnostics;
 
-var file = System.IO.File.OpenText("input.txt");
+var file = System.IO.File.OpenText("input2.txt");
 var input = file.ReadToEnd()
     .Split("\r\n")
     .ToImmutableList();
@@ -81,5 +81,10 @@ Console.WriteLine($"[{sw.Elapsed}] P1: {sumBoard(winners.First().winnerBoard, dr
 
 // P2
 Console.WriteLine($"[{sw.Elapsed}] P2: {sumBoard(winners.Last().winnerBoard, draws.Take(winners.Last().round).ToList()) * draws[winners.Last().round - 1]}");
+
+foreach (var winner in winners) {
+    Console.WriteLine($"Round: [{winner.round}]; Result: [{sumBoard(winner.winnerBoard, draws.Take(winner.round).ToList()) * draws[winner.round - 1]}]");
+}
+
 
 sw.Stop();
