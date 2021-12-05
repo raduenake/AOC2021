@@ -29,36 +29,28 @@ foreach (var l in input)
         {
             if (dict.ContainsKey(point))
             {
-                dict[point]++;
-            }
-            else
-            {
                 dict.Add(point, 1);
             }
+            dict[point]++;
 
             if (point == l.end)
             {
                 break;
             }
 
-            var inc = (x: 0, y: 0);
-            if (l.end.x > point.x)
+            point = Math.Sign(l.end.x - point.x) switch
             {
-                inc = (++inc.x, inc.y);
-            }
-            else if (l.end.x < point.x)
+                -1 => (--point.x, point.y),
+                1 => (++point.x, point.y),
+                _ => point,
+            };
+
+            point = Math.Sign(l.end.y - point.y) switch
             {
-                inc = (--inc.x, inc.y);
-            }
-            if (l.end.y > point.y)
-            {
-                inc = (inc.x, ++inc.y);
-            }
-            else if (l.end.y < point.y)
-            {
-                inc = (inc.x, --inc.y);
-            }
-            point = (point.x + inc.x, point.y + inc.y);
+                -1 => (point.x, --point.y),
+                1 => (point.x, ++point.y),
+                _ => point
+            };
         }
     }
 }
