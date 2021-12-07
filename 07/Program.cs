@@ -7,23 +7,18 @@ var input = file.ReadToEnd()
     .Select(v => double.Parse(v))
     .ToImmutableList();
 
-var minFuel = double.MaxValue;
-for (var i = input.Min(); i <= input.Max(); i++)
-{
-    var fuel = input.Aggregate((double)0, (acc, crab) =>
-    {
-        var distance = Math.Abs(crab - i);
-        // Part 1
-        // acc += distance;
-        // Part 2
-        acc += Math.Floor(distance * (distance + 1) / 2);
+var p1 = Enumerable.Range((int)input.Min(), (int)(input.Max() - input.Min() + 1))
+    .Select(pos =>
+        input.Aggregate((double)0, (acc, crab) => acc += Math.Abs(crab - pos))
+    ).Min();
 
-        return acc;
-    });
-    if (fuel < minFuel)
-    {
-        minFuel = fuel;
-    }
-}
+var p2 = Enumerable.Range((int)input.Min(), (int)(input.Max() - input.Min() + 1))
+    .Select(pos =>
+        input.Aggregate((double)0, (acc, crab) =>
+        {
+            var distance = Math.Abs(crab - pos);
+            return acc += Math.Floor(distance * (distance + 1) / 2);
+        })
+    ).Min();
 
-Console.WriteLine($"Answer: {minFuel}");
+Console.WriteLine($"P1: {p1}\nP2: {p2}");
