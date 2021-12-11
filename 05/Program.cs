@@ -27,7 +27,7 @@ foreach (var l in input)
         var point = l.start;
         while (true)
         {
-            if (dict.ContainsKey(point))
+            if (!dict.ContainsKey(point))
             {
                 dict.Add(point, 1);
             }
