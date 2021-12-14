@@ -10,8 +10,8 @@ $totalRun = 0
         
         & dotnet clean > $null
         
-        $build = (Measure-Command { & dotnet build --configuration Release > $null }).TotalMilliseconds
-        $run = (Measure-Command { & ".\bin\Release\net6.0\$($_).exe" > $null }).TotalMilliseconds
+        $build = (Measure-Command { & dotnet build --configuration Release --arch x64 --no-self-contained > $null }).TotalMilliseconds
+        $run = (Measure-Command { & ".\bin\Release\net6.0\win-x64\$($_).exe" > $null }).TotalMilliseconds
         
         $totalBuild = $totalBuild + $build
         $totalRun = $totalRun + $run
