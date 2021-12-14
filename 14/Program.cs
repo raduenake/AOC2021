@@ -6,7 +6,7 @@ var input = file.ReadToEnd()
     .Split("\r\n")
     .ToImmutableList();
 
-var polimer = input.First();
+var polymer = input.First();
 var rules = input.Skip(2).Select(l =>
     {
         var s = l.Split(" -> ");
@@ -17,11 +17,11 @@ var rules = input.Skip(2).Select(l =>
 var runPolymer = (int steps) =>
 {
     var counts = new ConcurrentDictionary<string, ulong>();
-    foreach (var polPair in polimer.Select(c => c).Zip(polimer.Select(c => c).Skip(1)))
+    foreach (var polPair in polymer.Select(c => c).Zip(polymer.Select(c => c).Skip(1)))
     {
         counts.AddOrUpdate("" + polPair.First + polPair.Second, 1, (k, v) => v += 1);
     }
-    counts.AddOrUpdate("" + polimer.Last(), 1, (k, v) => v += 1);
+    counts.AddOrUpdate("" + polymer.Last(), 1, (k, v) => v += 1);
 
     foreach (var _ in Enumerable.Range(0, steps))
     {
