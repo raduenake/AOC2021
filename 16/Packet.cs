@@ -1,8 +1,8 @@
-record Packet(Int64 Version, Int64 Typeid, Int64 Value, List<Packet> Children)
+record Packet(Int64 Version, Int64 TypeId, Int64 Value, List<Packet> Children)
 {
     public Int64 SumVer() => Version + Children.Sum(p => p.SumVer());
 
-    public Int64 Eval() => Typeid switch
+    public Int64 Eval() => TypeId switch
     {
         0 => Children.Sum(p => p.Eval()),
         1 => Children.Aggregate(1L, (acc, p) => acc * p.Eval()),
