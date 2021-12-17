@@ -42,8 +42,8 @@ class Simulation
 
     public IEnumerable<(bool hit, int x, int y, int yMaxHit)> RunSim()
     {
-        foreach (var dx in Enumerable.Range(-1000, 2000))
-            foreach (var dy in Enumerable.Range(-1000, 2000))
+        foreach (var dy in Enumerable.Range(-150, 250))
+            foreach (var dx in Enumerable.Range(0, 250))
             {
                 var result = Simulate(dx, dy);
                 if (result.hit)
