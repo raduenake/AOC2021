@@ -4,7 +4,7 @@ var p2Start = 10;
 var die = 0;
 var rollDie = () =>
 {
-    return ++die;
+    return ++die % 100;
 };
 
 var p1Score = 0L;
@@ -56,7 +56,7 @@ splitUnivPlay = (int p1Pos, int scoreP1, int p2Pos, int scoreP2) =>
                 var splitScoreP1 = scoreP1 + splitP1Pos + 1;
 
                 var res = splitUnivPlay(p2Pos, scoreP2, splitP1Pos, splitScoreP1);
-                // players are swapped, this is "confusing"
+                // players are swapped, this is "confusing", but needed for the logic
                 result = (result.p1wins + res.p2wins, result.p2wins + res.p1wins);
             }
     gameHistory.Add((p1Pos, scoreP1, p2Pos, scoreP2), result);
