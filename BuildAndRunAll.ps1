@@ -9,6 +9,7 @@ $totalRun = 0
         Set-Location $_
         
         & dotnet clean > $null
+        & dotnet restore > $null
         
         $build = (Measure-Command { & dotnet build --configuration Release --arch x64 --no-self-contained > $null }).TotalMilliseconds
         $run = (Measure-Command { & ".\bin\Release\net6.0\win-x64\$($_).exe" > $null }).TotalMilliseconds
